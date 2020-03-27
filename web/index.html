@@ -18,9 +18,23 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <!-- This script installs service_worker.js to provide PWA functionality to
-       application. For more information, see:
-       https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.13.0/firebase-firestore.js"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyDWYR-e9tFLATSJ5ccGfq-eOkZRbGva9xw",
+      authDomain: "planning-poker-d8c87.firebaseapp.com",
+      databaseURL: "https://planning-poker-d8c87.firebaseio.com",
+      projectId: "planning-poker-d8c87",
+      storageBucket: "planning-poker-d8c87.appspot.com",
+      messagingSenderId: "855583329228",
+      appId: "1:855583329228:web:983621a513532217a32b69",
+      measurementId: "G-WD0273MWLS"
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
