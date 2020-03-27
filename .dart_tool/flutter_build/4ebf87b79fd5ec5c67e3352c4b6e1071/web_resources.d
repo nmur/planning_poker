@@ -1,0 +1,1 @@
+ build\\web\\favicon.png build\\web\\icons\\Icon-192.png build\\web\\icons\\Icon-512.png build\\web\\index.html build\\web\\manifest.json:  D:\\code\\planning_poker\\web\\favicon.png D:\\code\\planning_poker\\web\\icons\\Icon-192.png D:\\code\\planning_poker\\web\\icons\\Icon-512.png D:\\code\\planning_poker\\web\\index.html D:\\code\\planning_poker\\web\\manifest.json
