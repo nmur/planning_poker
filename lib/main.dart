@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'poker_card.dart';
 
 void main() {
   runApp(MyApp());
@@ -45,32 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
               default:
                 return new Wrap(
                   children: snapshot.data.documents.map<Widget>((DocumentSnapshot document) {
-                    return new Card(
-                      margin: EdgeInsets.all(20),
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        side: new BorderSide(color: Colors.blue, width: 15),
-                      ),
-                      child: SizedBox(
-                        width: 270,
-                        height: 460,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(height: 30),
-                            new Text(
-                              document['estimate'].toString(),
-                              style: TextStyle(fontSize: 180),
-                            ),
-                            new Text(
-                              document['name'],
-                              style: TextStyle(fontSize: 30),
-                            )
-                          ]
-                        ),
-                      ),
-                    );
+                    return PokerCard(document: document);
                   }).toList()
                 );
             }
@@ -80,3 +56,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
