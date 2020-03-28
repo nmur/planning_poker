@@ -32,7 +32,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: GestureDetector(
+          onTap: () {
+            Firestore.instance.collection('estimates').document('Nick').setData({'estimate': 8});
+          },
+          child: Text(widget.title)
+        ),
       ),
       body: Center(
         child: StreamBuilder(
