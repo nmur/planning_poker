@@ -51,15 +51,23 @@ class _MyHomePageState extends State<MyHomePage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         side: new BorderSide(color: Colors.blue, width: 15),
-                        ),
+                      ),
                       child: SizedBox(
                         width: 270,
                         height: 460,
-                        child: Center(
-                          child: new Text(
-                            document['estimate'].toString(),
-                            style: TextStyle(fontSize: 180),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            SizedBox(height: 30),
+                            new Text(
+                              document['estimate'].toString(),
+                              style: TextStyle(fontSize: 180),
                             ),
+                            new Text(
+                              document['name'],
+                              style: TextStyle(fontSize: 30),
+                            )
+                          ]
                         ),
                       ),
                     );
