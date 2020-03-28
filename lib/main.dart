@@ -106,6 +106,29 @@ class _MyHomePageState extends State<MyHomePage> {
                       .delete();
                     },
                   ),
+                  FlatButton(
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                          size: 24.0,
+                        ),
+                        Text('ALL'),
+                      ],
+                    ),
+                    color: Colors.blue,
+                    onPressed: () {
+                      Firestore.instance
+                      .collection('estimates')
+                      .getDocuments()
+                      .then((snapshot) {
+                        for (DocumentSnapshot documentSnapshot in snapshot.documents) {
+                          documentSnapshot.reference.delete();
+                        }
+                      });
+                    }
+                  ),
                 ],
               )
             ]
