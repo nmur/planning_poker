@@ -33,17 +33,34 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: StreamBuilder(
-        stream: Firestore.instance.collection('estimates').snapshots(),
-        builder: (context, snapshot)
-        {
-          if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting: return new Text('Loading...');
-            default:
-              return Text(snapshot.data.documents.length.toString());
+      body: Center(
+        child: StreamBuilder(
+          stream: Firestore.instance.collection('estimates').snapshots(),
+          builder: (context, snapshot)
+          {
+            if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting: 
+                return new Text('Loading...');
+              default:
+                return new Wrap(
+                  children: snapshot.data.documents.map<Widget>((DocumentSnapshot document) {
+                    return new Card(
+                      margin: EdgeInsets.all(10.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        side: new BorderSide(color: Colors.blue, width: 5),
+                        ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: new Text(document['name']),
+                      ),
+                    );
+                  }).toList()
+                );
+            }
           }
-        }
+        ),
       )
     );
   }
