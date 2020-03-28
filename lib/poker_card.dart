@@ -30,7 +30,7 @@ class PokerCard extends StatelessWidget {
               style: TextStyle(fontSize: 180),
             ),
             new Text(
-              document['name'],
+              document.documentID,
               style: TextStyle(fontSize: 30),
             )
           ]
