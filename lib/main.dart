@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'poker_card.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,18 +34,26 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: StreamBuilder(
-        stream: Firestore.instance.collection('estimates').snapshots(),
-        builder: (context, snapshot)
-        {
-          if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting: return new Text('Loading...');
-            default:
-              return Text(snapshot.data.documents.length.toString());
+      body: Center(
+        child: StreamBuilder(
+          stream: Firestore.instance.collection('estimates').snapshots(),
+          builder: (context, snapshot)
+          {
+            if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting: 
+                return new Text('Loading...');
+              default:
+                return new Wrap(
+                  children: snapshot.data.documents.map<Widget>((DocumentSnapshot document) {
+                    return PokerCard(document: document);
+                  }).toList()
+                );
+            }
           }
-        }
+        ),
       )
     );
   }
 }
+
