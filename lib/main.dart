@@ -46,14 +46,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 return new Wrap(
                   children: snapshot.data.documents.map<Widget>((DocumentSnapshot document) {
                     return new Card(
-                      margin: EdgeInsets.all(10.0),
+                      margin: EdgeInsets.all(20),
+                      elevation: 5,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        side: new BorderSide(color: Colors.blue, width: 5),
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        side: new BorderSide(color: Colors.blue, width: 15),
                         ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: new Text(document['name']),
+                      child: SizedBox(
+                        width: 270,
+                        height: 460,
+                        child: Center(
+                          child: new Text(
+                            document['estimate'].toString(),
+                            style: TextStyle(fontSize: 180),
+                            ),
+                        ),
                       ),
                     );
                   }).toList()
