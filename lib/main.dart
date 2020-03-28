@@ -114,6 +114,20 @@ class _MyHomePageState extends State<MyHomePage> {
                       .setData({'estimate': 3});
                     },
                   ),
+                  FlatButton(
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                      size: 24.0,
+                    ),
+                    color: Colors.blue,
+                    onPressed: () {
+                      Firestore.instance
+                      .collection('estimates')
+                      .document(myController.text)
+                      .delete();
+                    },
+                  ),
                 ],
               )
             ]
