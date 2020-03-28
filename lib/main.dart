@@ -84,36 +84,14 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               ButtonBar(
                 children: <Widget>[
-                  FlatButton(
-                    child: Text('1'),
-                    color: Colors.blue,
-                    onPressed: () {
-                      Firestore.instance
-                      .collection('estimates')
-                      .document(myController.text)
-                      .setData({'estimate': 1});
-                    },
-                  ),
-                  FlatButton(
-                    child: Text('2'),
-                    color: Colors.blue,
-                    onPressed: () {
-                      Firestore.instance
-                      .collection('estimates')
-                      .document(myController.text)
-                      .setData({'estimate': 2});
-                    },
-                  ),
-                  FlatButton(
-                    child: Text('3'),
-                    color: Colors.blue,
-                    onPressed: () {
-                      Firestore.instance
-                      .collection('estimates')
-                      .document(myController.text)
-                      .setData({'estimate': 3});
-                    },
-                  ),
+                  buildEstimationButton(value: 1),
+                  buildEstimationButton(value: 2),
+                  buildEstimationButton(value: 3),
+                  buildEstimationButton(value: 5),
+                  buildEstimationButton(value: 8),
+                  buildEstimationButton(value: 13),
+                  buildEstimationButton(value: 20),
+                  buildEstimationButton(value: 40),
                   FlatButton(
                     child: Icon(
                       Icons.delete,
@@ -134,6 +112,19 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       )
+    );
+  }
+
+  FlatButton buildEstimationButton({int value}) {
+    return FlatButton(
+      child: Text(value.toString()),
+      color: Colors.blue,
+      onPressed: () {
+        Firestore.instance
+        .collection('estimates')
+        .document(myController.text)
+        .setData({'estimate': value});
+      },
     );
   }
 }
