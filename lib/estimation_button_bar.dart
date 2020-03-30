@@ -12,6 +12,7 @@ class EstimationButtonBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ButtonBar(
+      alignment: MainAxisAlignment.center,
       children: <Widget>[
         buildEstimationButton(value: 1),
         buildEstimationButton(value: 2),
