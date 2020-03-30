@@ -41,46 +41,75 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-          alignment: Alignment.center,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 300,
-                  child: TextField(
-                    controller: myController,
-                    style: TextStyle(fontSize: 30),
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Name',
-                    ),
-                  ),
+      alignment: Alignment.center,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 300,
+              child: TextField(
+                controller: myController,
+                style: TextStyle(fontSize: 30),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Name',
                 ),
-                StreamBuilder(
-                    stream:
-                        Firestore.instance.collection('estimates').snapshots(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError)
-                        return new Text('Error: ${snapshot.error}');
-                      switch (snapshot.connectionState) {
-                        case ConnectionState.waiting:
-                          return new Text('Loading...');
-                        default:
-                          return Container(
-                            height: MediaQuery.of(context).size.height * 0.7,
-                            child: new Wrap(
+              ),
+            ),
+            StreamBuilder(
+                stream: Firestore.instance.collection('estimates').snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError)
+                    return new Text('Error: ${snapshot.error}');
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.waiting:
+                      return new Text('Loading...');
+                    default:
+                      return Container(
+                        height: MediaQuery.of(context).size.height * 0.7,
+                        child: Column(
+                          children: <Widget>[
+                            new Wrap(
                                 alignment: WrapAlignment.center,
                                 children: snapshot.data.documents
                                     .map<Widget>((DocumentSnapshot document) {
                                   return Expanded(
                                       child: PokerCard(document: document));
                                 }).toList()),
-                          );
-                      }
-                    }),
-                EstimationButtonBar(myController: myController)
-              ]),
-        ));
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                new FlatButton(
+                                  child: Text('Reveal All'),
+                                  color: Colors.blue,
+                                  textColor: Colors.white,
+                                  onPressed: () {
+                                    for (DocumentSnapshot document in snapshot.data.documents) {
+                                      document.reference.updateData({'revealed': true});
+                                    }
+                                  },
+                                ),
+                                SizedBox(width: 20),
+                                new FlatButton(
+                                  child: Text('Hide All'),
+                                  color: Colors.blue,
+                                  textColor: Colors.white,
+                                  onPressed: () {
+                                    for (DocumentSnapshot document in snapshot.data.documents) {
+                                      document.reference.updateData({'revealed': false});
+                                    }
+                                  },
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      );
+                  }
+                }),
+            EstimationButtonBar(myController: myController)
+          ]),
+    ));
   }
 }

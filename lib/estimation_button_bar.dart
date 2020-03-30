@@ -14,6 +14,7 @@ class EstimationButtonBar extends StatelessWidget {
     return ButtonBar(
       alignment: MainAxisAlignment.center,
       children: <Widget>[
+        buildEstimationButton(value: 0),
         buildEstimationButton(value: 1),
         buildEstimationButton(value: 2),
         buildEstimationButton(value: 3),
@@ -28,7 +29,7 @@ class EstimationButtonBar extends StatelessWidget {
             color: Colors.white,
             size: 24.0,
           ),
-          color: Colors.blue,
+          color: Colors.red,
           onPressed: () {
             Firestore.instance
             .collection('estimates')
@@ -47,7 +48,7 @@ class EstimationButtonBar extends StatelessWidget {
               Text('ALL'),
             ],
           ),
-          color: Colors.blue,
+          color: Colors.red,
           onPressed: () {
             Firestore.instance
             .collection('estimates')
@@ -71,7 +72,7 @@ class EstimationButtonBar extends StatelessWidget {
         Firestore.instance
         .collection('estimates')
         .document(myController.text)
-        .setData({'estimate': value});
+        .setData({'estimate': value, 'revealed': false});
       },
     );
   }
