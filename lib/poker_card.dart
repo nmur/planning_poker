@@ -12,7 +12,7 @@ class PokerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Card(
-      margin: EdgeInsets.all(20),
+      margin: EdgeInsets.all(10),
       elevation: 5,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
