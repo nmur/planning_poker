@@ -32,49 +32,64 @@ class EstimationButtonBar extends StatelessWidget {
           color: Colors.red,
           onPressed: () {
             Firestore.instance
-            .collection('estimates')
-            .document(myController.text)
-            .delete();
+                .collection('estimates')
+                .document(myController.text)
+                .delete();
           },
         ),
         FlatButton(
-          child: Row(
-            children: <Widget>[
-              Icon(
-                Icons.delete,
-                color: Colors.white,
-                size: 24.0,
-              ),
-              Text('ALL'),
-            ],
-          ),
-          color: Colors.red,
-          onPressed: () {
-            Firestore.instance
-            .collection('estimates')
-            .getDocuments()
-            .then((snapshot) {
-              for (DocumentSnapshot documentSnapshot in snapshot.documents) {
-                documentSnapshot.reference.delete();
-              }
-            });
-          }
-        ),
+            child: Row(
+              children: <Widget>[
+                Icon(
+                  Icons.delete,
+                  color: Colors.white,
+                  size: 24.0,
+                ),
+                Text('ALL'),
+              ],
+            ),
+            color: Colors.red,
+            onPressed: () {
+              Firestore.instance
+                  .collection('estimates')
+                  .getDocuments()
+                  .then((snapshot) {
+                for (DocumentSnapshot documentSnapshot in snapshot.documents) {
+                  documentSnapshot.reference.delete();
+                }
+              });
+            }),
       ],
     );
   }
 
-  FlatButton buildEstimationButton({int value}) {
-    return FlatButton(
-      child: Text(value.toString()),
-      color: Colors.blue,
-      onPressed: () {
+  Widget buildEstimationButton({int value}) {
+    return GestureDetector(
+      child: new Card(
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(3)),
+          side: new BorderSide(
+              color: Colors.blue,
+              width: 5),
+        ),
+        child: SizedBox(
+          width: 60,
+          height: 100,
+          child: Center(
+            child: Text(
+              value.toString(),
+              style: TextStyle(fontSize: 40),
+            )
+          )
+        ),
+      ),
+      onTap: () {
         Firestore.instance
-        .collection('estimates')
-        .document(myController.text)
-        .setData({'estimate': value, 'revealed': false});
+            .collection('estimates')
+            .document(myController.text)
+            .setData({'estimate': value, 'revealed': false});
       },
     );
   }
 }
-
