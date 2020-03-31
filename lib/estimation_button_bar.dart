@@ -12,6 +12,7 @@ class EstimationButtonBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ButtonBar(
+      buttonPadding: EdgeInsets.all(0),
       alignment: MainAxisAlignment.center,
       children: <Widget>[
         buildEstimationButton(value: 0),
@@ -23,58 +24,82 @@ class EstimationButtonBar extends StatelessWidget {
         buildEstimationButton(value: 13),
         buildEstimationButton(value: 20),
         buildEstimationButton(value: 40),
-        FlatButton(
-          child: Icon(
-            Icons.delete,
-            color: Colors.white,
-            size: 24.0,
+        GestureDetector(
+          child: new Card(
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(7)),
+              side: new BorderSide(color: Colors.red, width: 5),
+            ),
+            child: SizedBox(
+                width: 60,
+                height: 100,
+                child: Center(
+                    child: Icon(
+                  Icons.delete,
+                  size: 40.0,
+                ))),
           ),
-          color: Colors.red,
-          onPressed: () {
+          onTap: () {
             Firestore.instance
-            .collection('estimates')
-            .document(myController.text)
-            .delete();
+                .collection('estimates')
+                .document(myController.text)
+                .delete();
           },
         ),
-        FlatButton(
-          child: Row(
-            children: <Widget>[
-              Icon(
-                Icons.delete,
-                color: Colors.white,
-                size: 24.0,
-              ),
-              Text('ALL'),
-            ],
+        GestureDetector(
+          child: new Card(
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(7)),
+              side: new BorderSide(color: Colors.red, width: 5),
+            ),
+            child: SizedBox(
+                width: 60,
+                height: 100,
+                child: Column(children: <Widget>[
+                  SizedBox(height: 30),
+                  Icon(
+                    Icons.delete,
+                    size: 40.0,
+                  ),
+                  Text('ALL', style: TextStyle(fontSize: 18),),
+                ])),
           ),
-          color: Colors.red,
-          onPressed: () {
+          onTap: () {
             Firestore.instance
-            .collection('estimates')
-            .getDocuments()
-            .then((snapshot) {
-              for (DocumentSnapshot documentSnapshot in snapshot.documents) {
-                documentSnapshot.reference.delete();
-              }
-            });
-          }
+                .collection('estimates')
+                .document(myController.text)
+                .delete();
+          },
         ),
       ],
     );
   }
 
-  FlatButton buildEstimationButton({int value}) {
-    return FlatButton(
-      child: Text(value.toString()),
-      color: Colors.blue,
-      onPressed: () {
+  Widget buildEstimationButton({int value}) {
+    return GestureDetector(
+      child: new Card(
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(7)),
+          side: new BorderSide(color: Colors.blue, width: 5),
+        ),
+        child: SizedBox(
+            width: 60,
+            height: 100,
+            child: Center(
+                child: Text(
+              value.toString(),
+              style: TextStyle(fontSize: 40),
+            ))),
+      ),
+      onTap: () {
         Firestore.instance
-        .collection('estimates')
-        .document(myController.text)
-        .setData({'estimate': value, 'revealed': false});
+            .collection('estimates')
+            .document(myController.text)
+            .setData({'estimate': value, 'revealed': false});
       },
     );
   }
 }
-
