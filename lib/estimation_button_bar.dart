@@ -68,9 +68,13 @@ class EstimationButtonBar extends StatelessWidget {
           ),
           onTap: () {
             Firestore.instance
-                .collection('estimates')
-                .document(myController.text)
-                .delete();
+                  .collection('estimates')
+                  .getDocuments()
+                  .then((snapshot) {
+                for (DocumentSnapshot documentSnapshot in snapshot.documents) {
+                  documentSnapshot.reference.delete();
+                }
+              });
           },
         ),
       ],

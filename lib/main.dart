@@ -47,10 +47,11 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              width: 300,
+              width: 220,
+              height: 60,
               child: TextField(
                 controller: myController,
-                style: TextStyle(fontSize: 30),
+                style: TextStyle(fontSize: 25),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Name',

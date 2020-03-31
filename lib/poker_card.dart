@@ -22,15 +22,15 @@ class PokerCard extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.007),
       ),
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.09,
-        height: MediaQuery.of(context).size.width * 0.15,
+        width: MediaQuery.of(context).size.width * 0.085,
+        height: MediaQuery.of(context).size.width * 0.145,
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           SizedBox(height: MediaQuery.of(context).size.width * 0.02),
           new Text(
             document['revealed'] ? document['estimate'].toString() : '?',
             style:
-                TextStyle(fontSize: MediaQuery.of(context).size.width * 0.06),
+                TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),
           ),
           new Text(
             document.documentID,
