@@ -74,8 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 alignment: WrapAlignment.center,
                                 children: snapshot.data.documents
                                     .map<Widget>((DocumentSnapshot document) {
-                                  return Expanded(
-                                      child: PokerCard(document: document));
+                                  return PokerCard(document: document);
                                 }).toList()),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
