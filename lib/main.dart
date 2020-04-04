@@ -85,8 +85,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                   color: Colors.blue,
                                   textColor: Colors.white,
                                   onPressed: () {
-                                    for (DocumentSnapshot document in snapshot.data.documents) {
-                                      document.reference.updateData({'revealed': true});
+                                    for (DocumentSnapshot document
+                                        in snapshot.data.documents) {
+                                      document.reference
+                                          .updateData({'revealed': true});
                                     }
                                   },
                                 ),
@@ -96,8 +98,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                   color: Colors.blue,
                                   textColor: Colors.white,
                                   onPressed: () {
-                                    for (DocumentSnapshot document in snapshot.data.documents) {
-                                      document.reference.updateData({'revealed': false});
+                                    for (DocumentSnapshot document
+                                        in snapshot.data.documents) {
+                                      document.reference
+                                          .updateData({'revealed': false});
                                     }
                                   },
                                 ),
@@ -108,7 +112,26 @@ class _MyHomePageState extends State<MyHomePage> {
                       );
                   }
                 }),
-            EstimationButtonBar(myController: myController)
+            StreamBuilder<Object>(
+                stream: Firestore.instance.collection('estimates').snapshots(),
+                builder: (context, AsyncSnapshot<dynamic> snapshot) {
+                  if (snapshot.hasError)
+                    return new Text('Error: ${snapshot.error}');
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.waiting:
+                      return new Text('Loading...');
+                    default:
+                      {
+                        if (myController.text.isNotEmpty)
+                          return Text(snapshot.data.documents
+                              .firstWhere((DocumentSnapshot doc) =>
+                                  doc.documentID ==
+                                  myController.text)['estimate']
+                              .toString());
+                        return EstimationButtonBar(myController: myController);
+                      }
+                  }
+                })
           ]),
     ));
   }
