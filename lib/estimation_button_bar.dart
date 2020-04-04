@@ -84,20 +84,31 @@ class EstimationButtonBar extends StatelessWidget {
 
   Widget buildEstimationButton({int value}) {
     return GestureDetector(
-      child: new Card(
-        elevation: 3,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(7)),
-          side: new BorderSide(color: value == estimate ? Colors.green : Colors.blue, width: 5),
+      child: Container(
+        decoration: value == estimate ? BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.yellow[600],
+              blurRadius: 5.0,
+              spreadRadius: 2.0,
+            ),
+          ],
+        ) : null,
+        child: new Card(
+          elevation: 3,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(7)),
+            side: new BorderSide(color: Colors.blue, width: 5),
+          ),
+          child: SizedBox(
+              width: 60,
+              height: 100,
+              child: Center(
+                  child: Text(
+                value.toString(),
+                style: TextStyle(fontSize: 40),
+              ))),
         ),
-        child: SizedBox(
-            width: 60,
-            height: 100,
-            child: Center(
-                child: Text(
-              value.toString(),
-              style: TextStyle(fontSize: 40),
-            ))),
       ),
       onTap: () {
         Firestore.instance
