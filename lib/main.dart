@@ -123,12 +123,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     default:
                       {
                         if (myController.text.isNotEmpty)
-                          return Text(snapshot.data.documents
+                          return EstimationButtonBar(myController: myController,
+                            estimate: snapshot.data.documents
                               .firstWhere((DocumentSnapshot doc) =>
                                   doc.documentID ==
                                   myController.text)['estimate']
-                              .toString());
-                        return EstimationButtonBar(myController: myController);
+                              );
+                        return EstimationButtonBar(myController: myController, estimate: -1);
                       }
                   }
                 })

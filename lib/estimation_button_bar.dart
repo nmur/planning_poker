@@ -4,10 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class EstimationButtonBar extends StatelessWidget {
   const EstimationButtonBar({
     Key key,
-    @required this.myController,
+    @required this.myController, this.estimate,
   }) : super(key: key);
 
   final TextEditingController myController;
+  final int estimate;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +88,7 @@ class EstimationButtonBar extends StatelessWidget {
         elevation: 3,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(7)),
-          side: new BorderSide(color: Colors.blue, width: 5),
+          side: new BorderSide(color: value == estimate ? Colors.green : Colors.blue, width: 5),
         ),
         child: SizedBox(
             width: 60,
