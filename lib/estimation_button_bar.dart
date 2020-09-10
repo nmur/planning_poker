@@ -15,15 +15,16 @@ class EstimationButtonBar extends StatelessWidget {
       buttonPadding: EdgeInsets.all(0),
       alignment: MainAxisAlignment.center,
       children: <Widget>[
-        buildEstimationButton(value: 0),
-        buildEstimationButton(value: 1),
-        buildEstimationButton(value: 2),
-        buildEstimationButton(value: 3),
-        buildEstimationButton(value: 5),
-        buildEstimationButton(value: 8),
-        buildEstimationButton(value: 13),
-        buildEstimationButton(value: 20),
-        buildEstimationButton(value: 40),
+        buildEstimationButton(value: '½'),
+        buildEstimationButton(value: '0'),
+        buildEstimationButton(value: '1'),
+        buildEstimationButton(value: '2'),
+        buildEstimationButton(value: '3'),
+        buildEstimationButton(value: '5'),
+        buildEstimationButton(value: '8'),
+        buildEstimationButton(value: '13'),
+        buildEstimationButton(value: '20'),
+        buildEstimationButton(value: '40'),
         GestureDetector(
           child: new Card(
             elevation: 3,
@@ -81,7 +82,7 @@ class EstimationButtonBar extends StatelessWidget {
     );
   }
 
-  Widget buildEstimationButton({int value}) {
+  Widget buildEstimationButton({String value}) {
     return GestureDetector(
       child: new Card(
         elevation: 3,
@@ -94,7 +95,7 @@ class EstimationButtonBar extends StatelessWidget {
             height: 100,
             child: Center(
                 child: Text(
-              value.toString(),
+              value,
               style: TextStyle(fontSize: 40),
             ))),
       ),
