@@ -15,8 +15,8 @@ class EstimationButtonBar extends StatelessWidget {
       buttonPadding: EdgeInsets.all(0),
       alignment: MainAxisAlignment.center,
       children: <Widget>[
-        buildEstimationButton(value: '½'),
         buildEstimationButton(value: '0'),
+        buildEstimationButton(value: '½'),
         buildEstimationButton(value: '1'),
         buildEstimationButton(value: '2'),
         buildEstimationButton(value: '3'),
