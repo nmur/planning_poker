@@ -1,5 +1,9 @@
 # planning_poker
-Simple web-targeted Planning Poker app built with Flutter. Website available [here](https://nmur.github.io/planning_poker/index.html#/).
+Simple web-targeted Planning Poker app built with Flutter. Website available here: [nickmurray.dev/poker](https://nmur.github.io/planning_poker/index.html#/).  
+  
+Just enter your name, select an estimate, and reveal all cards when everyone's ready.    
+    
+![Poker app preview](https://i.imgur.com/4QhEobT.png)
 
 # Update website hosted on Github Pages
 1. Checkout `master` branch.
